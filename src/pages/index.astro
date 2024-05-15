@@ -1,0 +1,94 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import {Footer} from "../components/Footer";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import "../styles/global.css"
+import {About} from "../components/about";
+
+import { client } from '../../tina/__generated__/client'
+import { MyComponent } from '../components/react'
+import cli from "@tinacms/cli";
+const response = await client.queries.post({relativePath: "hello-world.md"});
+const postArray = [];
+const blogs = await client.queries.blogConnection()
+blogs.data.blogConnection.edges?.map((post) => {
+  postArray.push(post?.node);
+});
+
+const about  = await client.queries.about({relativePath:"about.md"});
+const connectWithMe = await client.queries.about({relativePath:"connect-with-me.md"});
+
+
+
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} /> -->
+  </head>
+  <body>
+    <Header />
+    <main>
+      <!-- <MyComponent client:tina {...response} /> -->
+      <div class="mx-auto max-w-screen-sm">
+        
+        <div class="space-y-16">
+          <!-- about -->
+          <About client:tina {...about} />
+          <section class="animate space-y-6 show">
+            <div class="flex flex-wrap gap-y-2 items-center justify-between">
+              <h5 class="font-semibold text-black dark:text-white">Updated</h5>
+              <a
+                href="/blog"
+                target="_self"
+                class="inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out underline underline-offset-2"
+              >
+                See all posts
+              </a>
+            </div>
+            <ul class="flex flex-col gap-4">
+              {
+                postArray?.map((post)=>
+              (
+              <li>
+                <a
+                  href={`/blog/${post._sys.filename}`}
+
+                  class="relative group flex flex-nowrap py-3 px-4 pr-10 rounded-lg border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"
+                >
+                  <div class="flex flex-col flex-1 truncate">
+                    <div class="font-semibold">{post.title}</div>
+                    <div class="text-sm">{post?.description}</div>
+                  </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    class="absolute top-1/2 right-2 -translate-y-1/2 size-5 stroke-2 fill-none stroke-current"
+                  >
+                    <line
+                      x1="5"
+                      y1="12"
+                      x2="19"
+                      y2="12"
+                      class="translate-x-3 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"
+                    ></line>
+                    <polyline
+                      points="12 5 19 12 12 19"
+                      class="-translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"
+                    ></polyline>
+                  </svg>
+                </a>
+              </li>
+              ))
+              }
+              
+            </ul>
+          </section>
+        </div>
+      </div>
+    </main>
+    <Footer client:tina {...connectWithMe}/>
+  </body>
+</html>

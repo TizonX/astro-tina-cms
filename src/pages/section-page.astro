@@ -1,0 +1,13 @@
+---
+import { SectionPage } from "../components/Page"
+import { client } from '../../tina/__generated__/client'
+const response = await client.queries.section({relativePath: "Hello-Vishal-Good-You-did-it.md"});
+
+// console.log(response)
+---
+<main>
+    <div>
+       <h1> Hello Page</h1>
+       <SectionPage client:tina {...response}/>
+    </div>
+</main>
