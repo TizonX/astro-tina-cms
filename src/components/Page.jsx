@@ -3,7 +3,7 @@ import { TinaMarkdown } from "tinacms/dist/rich-text";
 
 export const SectionPage = (props) => {
   const { data } = useTina(props);
-  console.log(data.section);
+//   console.log(data.section);
   const { section } = data;
   const { title, sections } = section;
   return (

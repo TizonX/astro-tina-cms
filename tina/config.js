@@ -126,7 +126,7 @@ export default defineConfig({
             list: true,
             templates: [
               {
-                label: "Text Section",
+                label: "Hero",
                 name: "textSection",
                 fields: [
                   {
@@ -156,6 +156,104 @@ export default defineConfig({
                     type: "string",
                     name: "caption",
                     label: "Caption",
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      // new page-section
+      {
+        name: "sectionpage",
+        label: "my-section",
+        path: "src/content/demo",
+        ui: {
+          router: () => {
+            return `/demo`;
+          },
+        },
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Title",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "object",
+            name: "sections_1",
+            label: "Sections",
+            list: true,
+            templates: [
+              {
+                label: "Hero",
+                name: "textSection",
+                fields: [
+                  {
+                    type: "string",
+                    name: "tagline",
+                    label: "Tagline",
+                  },
+                  {
+                    type: "string",
+                    name: "headline",
+                    label: "Headline",
+                  },
+                  {
+                    type: "rich-text",
+                    name: "text",
+                    label: "Text",
+                  },
+                  //
+                  {
+                    type: "object",
+                    name: "sections_2",
+                    label: "Sections",
+                    list: true,
+                    templates: [
+                      {
+                        label: "Get Started",
+                        name: "textSection",
+                        fields: [
+                          {
+                            type: "string",
+                            name: "heading",
+                            label: "Label",
+                            required: true,
+                          },
+                          {
+                            type: "string",
+                            name: "Type",
+                            label: "Option",
+                            options: ["button", "link"],
+                          },
+                          {
+                            type: "boolean",
+                            name: "toggle",
+                            label: "Icon",
+                            default: false,
+                          },
+                          {
+                            type: "string",
+                            name: "filePath",
+                            label: "Link",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    type: "image",
+                    name: "image",
+                    label: "Image Upload",
+                  },
+                  {
+                    type: "string",
+                    name: "color",
+                    label: "Color",
+                    options: ["red", "blue", "green", "yellow"],
                   },
                 ],
               },

@@ -1917,3 +1917,23 @@ html.scrolled #back-to-top {
   width: 1px;
   height: 1px;
 }
+
+/* custom */
+
+.df{
+  display: flex;
+}
+.dfc{
+  display: flex;
+  flex-direction: column;
+}
+.ihw{
+  height: 300px;
+  width: 600px;
+}
+.bor{
+  border: 1px solid black;
+}
+.px-3{
+  padding: 0px 10px;
+}

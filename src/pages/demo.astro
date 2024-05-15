@@ -1,0 +1,12 @@
+---
+import { client } from '../../tina/__generated__/client'
+import {Demo} from "../components/Demo";
+
+const page  = await client.queries.sectionpage({relativePath:"Tina-Cloud-Starter.md"});
+// console.log(page);
+---
+
+<main>
+    <h1>My - Demo</h1>
+    <Demo client:tina {...page} />
+</main>
