@@ -1,7 +1,7 @@
 import { useTina } from "tinacms/dist/react";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 
-export const SectionPage = (props) => {
+export const SectionDemoPage = (props) => {
   const { data } = useTina(props);
 //   console.log(data.section);
   const { section } = data;

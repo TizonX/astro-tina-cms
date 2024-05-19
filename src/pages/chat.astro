@@ -1,0 +1,49 @@
+---
+import { useTina } from 'tinacms/dist/react';
+import Hero from '../components/Hero';
+import Features from '../components/Features';
+
+const tinaProps = {
+  collection: 'chat',
+  relativePath: 'chat-gpt.md',  // This is a reference; TinaCMS will create and manage the file.
+  query: `
+    query ChatQuery($relativePath: String!) {
+      chat(relativePath: $relativePath) {
+        title
+        sections {
+          __typename
+          ... on PageSectionsHero {
+            heading
+          }
+          ... on PageSectionsFeatures {
+            heading
+            buttonText
+          }
+        }
+      }
+    }
+  `,
+};
+
+const { data, isLoading } = useTina(tinaProps);
+---
+
+<main>
+  {isLoading ? (
+    <p>Loading...</p>
+  ) : (
+    <>
+      <h1 data-tina-field={tinaField(data.page, 'title')}>{data.page.title}</h1>
+      {data.page.sections.map((section, index) => {
+        switch (section.__typename) {
+          case 'PageSectionsHero':
+            return <Hero key={index} data={section} />;
+          case 'PageSectionsFeatures':
+            return <Features key={index} data={section} />;
+          default:
+            return null;
+        }
+      })}
+    </>
+  )}
+</main>

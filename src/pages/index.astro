@@ -13,7 +13,7 @@ const response = await client.queries.post({relativePath: "hello-world.md"});
 const postArray = [];
 const blogs = await client.queries.blogConnection()
 blogs.data.blogConnection.edges?.map((post) => {
-  postArray.push(post?.node);
+  postArray.push(post.node);
 });
 
 const about  = await client.queries.about({relativePath:"about.md"});
@@ -27,6 +27,7 @@ const connectWithMe = await client.queries.about({relativePath:"connect-with-me.
 <html lang="en">
   <head>
     <!-- <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} /> -->
+    <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css">
   </head>
   <body>
     <Header />

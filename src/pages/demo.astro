@@ -1,12 +1,46 @@
 ---
 import { client } from '../../tina/__generated__/client'
-import {Demo} from "../components/Demo";
+import {DemoPage} from "../components/Demo";
 
 const page  = await client.queries.sectionpage({relativePath:"Tina-Cloud-Starter.md"});
+// const QUERY = `query sectionpage($relativePath: String!) {
+//   sectionpage(relativePath: $relativePath) {
+//     ...SectionpageParts
+//   }
+// }
+
+// fragment SectionpageParts on Sectionpage {
+//   __typename
+//   title
+//   sections {
+//     __typename
+//     ... on SectionpageSectionsHeroSection {
+//       tagline
+//       headline
+//       text
+//       image
+//       color
+//       actionSection {
+//         ... on SectionpageSectionsHeroSectionActionSectionActionLabel {
+//           heading
+//           type
+//           toggle
+//           filePath
+//         }
+//       }
+//     }
+//     ... on SectionpageSectionsFeatureSection {
+//       featureItems {
+//         __typename
+//         title
+//         featureText
+//       }
+//     }
+//   }
+// }`
 // console.log(page);
 ---
 
 <main>
-    <h1>My - Demo</h1>
-    <Demo client:tina {...page} />
+    <DemoPage client:tina {...page} />
 </main>

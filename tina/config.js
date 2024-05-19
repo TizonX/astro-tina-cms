@@ -1,5 +1,18 @@
 import { defineConfig } from "tinacms";
+const heroTemplate = {
+  name: "hero",
+  label: "Hero Section",
+  fields: [{ name: "heading", label: "Heading", type: "string" }],
+};
 
+const featuresTemplate = {
+  name: "features",
+  label: "Features Section",
+  fields: [
+    { name: "heading", label: "Heading", type: "string" },
+    { name: "buttonText", label: "Button Text", type: "string" },
+  ],
+};
 // Your hosting provider likely exposes this as an environment variable
 const branch =
   process.env.GITHUB_BRANCH ||
@@ -183,13 +196,13 @@ export default defineConfig({
           },
           {
             type: "object",
-            name: "sections_1",
+            name: "sections",
             label: "Sections",
             list: true,
             templates: [
               {
                 label: "Hero",
-                name: "textSection",
+                name: "heroSection",
                 fields: [
                   {
                     type: "string",
@@ -200,49 +213,13 @@ export default defineConfig({
                     type: "string",
                     name: "headline",
                     label: "Headline",
+                    required: true,
+                    isTitle: true,
                   },
                   {
                     type: "rich-text",
                     name: "text",
                     label: "Text",
-                  },
-                  //
-                  {
-                    type: "object",
-                    name: "sections_2",
-                    label: "Sections",
-                    list: true,
-                    templates: [
-                      {
-                        label: "Get Started",
-                        name: "textSection",
-                        fields: [
-                          {
-                            type: "string",
-                            name: "heading",
-                            label: "Label",
-                            required: true,
-                          },
-                          {
-                            type: "string",
-                            name: "Type",
-                            label: "Option",
-                            options: ["button", "link"],
-                          },
-                          {
-                            type: "boolean",
-                            name: "toggle",
-                            label: "Icon",
-                            default: false,
-                          },
-                          {
-                            type: "string",
-                            name: "filePath",
-                            label: "Link",
-                          },
-                        ],
-                      },
-                    ],
                   },
                   {
                     type: "image",
@@ -255,9 +232,131 @@ export default defineConfig({
                     label: "Color",
                     options: ["red", "blue", "green", "yellow"],
                   },
+                  {
+                    type: "object",
+                    name: "actionSection",
+                    label: "Actions",
+                    list: true,
+                    templates: [
+                      {
+                        label: "Action Label",
+                        name: "actionLabel",
+                        fields: [
+                          {
+                            type: "string",
+                            name: "heading",
+                            label: "Label",
+                            required: true,
+                            isTitle: true,
+                          },
+                          {
+                            type: "string",
+                            name: "type",
+                            label: "Button",
+                            options: ["button", "link"],
+                            default: "button",
+                          },
+                          {
+                            type: "boolean",
+                            name: "toggle",
+                            label: "Icon",
+                            default: false,
+                            default: "false",
+                          },
+                          {
+                            type: "string",
+                            name: "filePath",
+                            label: "Link",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                label: "Feature",
+                name: "featureSection",
+                fields: [
+                  {
+                    name: "featureItems",
+                    label: "Feature Items",
+                    type: "object",
+                    list: true,
+                    ui: {
+                      itemProps: (item) => {
+                        return { label: `${item?.title}` };
+                      },
+                    },
+                    defaultItem: {
+                      title: "Here's Another Feature",
+                      featureText:
+                        "This is where you might talk about the feature, if this wasn't just filler text.",
+                    },
+                    fields: [
+                      {
+                        name: "title",
+                        label: "Title",
+                        type: "string",
+                        isTitle: true,
+                        required: true,
+                      },
+                      {
+                        label: "Text",
+                        name: "featureText",
+                        type: "string",
+                        ui: {
+                          component: "textarea",
+                        },
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                label: "Testimonial",
+                name: "testimonialSection",
+                type: "object",
+                list: true,
+                defaultItem: {
+                  testimonialQuote: "Phil Karlton",
+                  testimonialAuthor:
+                    "There are only two hard things in Computer Science: cache invalidation and naming things.",
+                },
+                fields: [
+                  {
+                    label: "Quote",
+                    name: "testimonialQuote",
+                    type: "string",
+                    ui: {
+                      component: "textarea",
+                    },
+                  },
+                  {
+                    name: "testimonialAuthor",
+                    label: "Author",
+                    type: "string",
+                  },
                 ],
               },
             ],
+          },
+        ],
+      },
+      //
+      {
+        name: "chat",
+        label: "chat-gpt",
+        path: "src/content/chat",
+        format: "md",
+        fields: [
+          { name: "title", label: "Title", type: "string" },
+          {
+            name: "sections",
+            label: "Sections",
+            type: "object",
+            list: true,
+            templates: [heroTemplate, featuresTemplate],
           },
         ],
       },

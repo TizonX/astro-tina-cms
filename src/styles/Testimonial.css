@@ -1,0 +1,26 @@
+/* src/Testimonial.css */
+.testimonial {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: 'Arial, sans-serif';
+  }
+  
+  .quote {
+    font-size: 1.5em;
+    font-style: italic;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .author {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+  }
+  

@@ -1920,20 +1920,23 @@ html.scrolled #back-to-top {
 
 /* custom */
 
-.df{
+.df {
   display: flex;
 }
-.dfc{
+.dfc {
   display: flex;
   flex-direction: column;
 }
-.ihw{
+.ihw {
   height: 300px;
-  width: 600px;
+  width: auto;
+  margin: 20px 0px;
 }
-.bor{
+.bor {
   border: 1px solid black;
 }
-.px-3{
+.px-3 {
   padding: 0px 10px;
+}
+.tagline {
 }
